@@ -1,9 +1,7 @@
-// src/lib/api.js
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:3000";
+const API_BASE = import.meta.env.VITE_API_BASE;
 
-export async function searchAmazon(q) {
-  const url = `${API_BASE}/api/amazon?q=${encodeURIComponent(q)}`;
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`Amazon API error: ${res.status}`);
-  return await res.json();
+export async function searchProducts(q) {
+  const res = await fetch(`${API_BASE}/api/search?q=${encodeURIComponent(q)}`);
+  if (!res.ok) throw new Error("Failed to fetch");
+  return res.json();
 }
